@@ -98,6 +98,8 @@ public class Sequence {
      * For example, the reverse complement of the DNA sequence ACCGT is achieved by replacing A with T,
      * the Cs with Gs, the G with C, and the T with A, resulting in TGGCA.
      *
+     * Updates the state of this sequence's sequence to the reverse complement.
+     *
      * @return the reverse complement of this sequence.
      * @throws SequenceException if the sequence type is neither DNA nor RNA.
      */
@@ -143,7 +145,7 @@ public class Sequence {
      * A transcription from DNA to RNA is the replacement of all Ts with Us.
      * A transcription from RNA to DNA is the replacement of all Us with Ts.
      *
-     * Updates the state of this sequence's sequence and type.
+     * Updates the state of this sequence's sequence and type to reflect the transcription.
      *
      * @throws SequenceException if the sequence type is neither DNA nor RNA.
      */
