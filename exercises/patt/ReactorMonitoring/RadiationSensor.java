@@ -32,7 +32,7 @@ public class RadiationSensor extends Subject {
     }
 
     /**
-     * Updates radiation, changes the state to true, and notifies all observers of
+     * Updates radiation and notifies all observers of
      * the change.
      */
     public void readRadiation() {
