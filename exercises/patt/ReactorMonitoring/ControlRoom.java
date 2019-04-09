@@ -1,6 +1,8 @@
 package patt.ReactorMonitoring;
 
 public class ControlRoom extends RadiationMonitor {
+    private double warningThreshold;
+    private double observedRadiation;
 
     /**
      * Constructs a ControlRoom object, which observes reactor radiation readings
@@ -10,7 +12,8 @@ public class ControlRoom extends RadiationMonitor {
      * @param warningThreshold The radiation threshold for when reports should be printed.
      */
     public ControlRoom(String location, double warningThreshold) {
-=
+        super(location);
+        this.warningThreshold = warningThreshold;
     }
 
     /**
@@ -18,7 +21,10 @@ public class ControlRoom extends RadiationMonitor {
      * the observation is equal to or greater than the warning threshold.
      */
     public void update(Subject subject) {
-
+        this.observedRadiation = ((RadiationSensor) subject).getRadiation();
+        if (this.warningThreshold <= this.observedRadiation) {
+            generateReport();
+        }
     }
 
     /**
@@ -26,6 +32,8 @@ public class ControlRoom extends RadiationMonitor {
      */
     @Override
     public String generateReport() {
-
+        String str = now() + " :: WARNING :: " + String.format("%.4f", this.observedRadiation) + " :: " + getLocation();
+        System.out.println(str);
+        return str;
     }
 }

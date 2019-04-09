@@ -13,7 +13,7 @@
       <excludeFolder url="file://$MODULE_DIR$/exercises/junit/FootyScore" />
       <excludeFolder url="file://$MODULE_DIR$/exercises/junit/Uber" />
       <excludeFolder url="file://$MODULE_DIR$/exercises/oop" />
-      <excludeFolder url="file://$MODULE_DIR$/exercises/patt/ReactorMonitoring" />
+      <excludeFolder url="file://$MODULE_DIR$/exercises/patt/Coffee" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

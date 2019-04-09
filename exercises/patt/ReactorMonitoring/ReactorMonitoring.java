@@ -6,7 +6,8 @@ public class ReactorMonitoring {
         RadiationSensor sensor = new RadiationSensor("Reactor A", 10);
 
         // Create sensor observers
-        RadiationMonitor control = new ControlRoom("Reactor A Control Room", 8.0);
+        RadiationMonitor control = new ControlRoom("Reactor A Control Room",
+                8.0);
         RadiationMonitor science = new ResearchCentre("Centre for Nuclear Research");
 
         // Attach observers to sensor

@@ -4,14 +4,14 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public abstract class RadiationMonitor implements Observer {
-
+    private String location;
     /**
      * Constructs a RadiationMonitor object.
      *
      * @param location An arbitrary location.
      */
     public RadiationMonitor(String location) {
-
+        this.location = location;
     }
 
     /**
@@ -20,7 +20,7 @@ public abstract class RadiationMonitor implements Observer {
      * @return location
      */
     public String getLocation() {
-
+        return location;
     }
 
     /**
