@@ -1,9 +1,11 @@
 package patt.ReactorMonitoring;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ResearchCentre extends RadiationMonitor {
-    private double sum_observations;
-    private double numObservations;
+    private ArrayList<Double> observations;
 
     /**
      * Constructs a ResearchCentre object, which observes reactor radiation readings
@@ -14,15 +16,14 @@ public class ResearchCentre extends RadiationMonitor {
      */
     public ResearchCentre(String location) {
         super(location);
-        this.sum_observations = 0;
+        this.observations = new ArrayList<>();
     }
 
     /**
      * Updates the monitor with a new observation and prints a report.
      */
     public void update(Subject subject) {
-        this.sum_observations += ((RadiationSensor) subject).getRadiation();
-        this.numObservations++;
+        this.observations.add(((RadiationSensor) subject).getRadiation());
         generateReport();
     }
 
@@ -32,7 +33,15 @@ public class ResearchCentre extends RadiationMonitor {
      * made so far, and dividing by the quantity of observations so far.
      */
     public String generateReport() {
-        double averageObservation = this.sum_observations/this.numObservations;
+        double averageObservation = 0;
+
+        if (!observations.isEmpty()) {
+            for (double observation : observations) {
+                averageObservation += observation;
+            }
+            averageObservation /= ((double) observations.size());
+        }
+
         String str = now() + " :: moving average :: " + String.format("%.4f", averageObservation)
                 + " :: " + getLocation();
         System.out.println(str);
