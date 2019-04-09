@@ -4,11 +4,11 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/exercises" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/exercises/coll" />
       <excludeFolder url="file://$MODULE_DIR$/exercises/coll/EnrollmentManager" />
       <excludeFolder url="file://$MODULE_DIR$/exercises/coll/Matrix" />
       <excludeFolder url="file://$MODULE_DIR$/exercises/coll/Movies" />
       <excludeFolder url="file://$MODULE_DIR$/exercises/coll/UserAccounts" />
-      <excludeFolder url="file://$MODULE_DIR$/exercises/junit" />
       <excludeFolder url="file://$MODULE_DIR$/exercises/junit/FootyScore" />
       <excludeFolder url="file://$MODULE_DIR$/exercises/junit/Uber" />
       <excludeFolder url="file://$MODULE_DIR$/exercises/oop" />
