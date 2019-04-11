@@ -1,6 +1,5 @@
 package junit.BioLibrary;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.*;
@@ -15,313 +14,195 @@ public class BioLibraryTests {
         Sequence = null;
     }
 
+    /**
+     Test: Sequence Method
+     */
+    // Test: correct inputs -> no error
     @Test
-    public void TestDNA_Sequence_RightInputs() {
-        // Variables being compared
-        String expectedMessage = "";
+    public void Test_Sequence_RightInput_DNA() {
+        String exp_message = "";
         String message = "";
-        // Parameters passed to "Sequence" constructor
         String sequence = "ACGT";
         Type type = Type.DNA;
-        // Running test
         try {
             Sequence = new Sequence(sequence, type);
         } catch (Exception e) {
             message = e.getMessage();
         }
-        // Comparing result of the test
-        assertEquals(expectedMessage, message);
+        assertEquals(exp_message, message);
     }
     @Test
-    public void TestDNA_Sequence_WrongInputsException() {
-        // Variables being compared
-        String expectedMessage = "DNA must contain only the letters A, C, G, and T.";
+    public void Test_Sequence_RightInput_RNA() {
+        String exp_message = "";
         String message = "";
-        // Parameters passed to "Sequence" constructor
-        String sequence = "TEST";
-        Type type = Type.DNA;
-        // Running test
+        String sequence = "AUGC";
+        Type type = Type.RNA;
         try {
             Sequence = new Sequence(sequence, type);
         } catch (Exception e) {
             message = e.getMessage();
         }
-        // Comparing result of the test
-        assertEquals(expectedMessage, message);
+        assertEquals(exp_message, message);
     }
+    // Test: wrong sequence -> correct exception message
     @Test
-    public void TestDNA_toString_RightInputs() {
-        // Unused exception message
+    public void Test_Sequence_WrongSequence_DNA() {
+        String exp_message = "DNA must contain only the letters A, C, G, and T.";
         String message = "";
-        // Parameters passed to "Sequence" constructor
-        String sequence = "ACGT";
+        String sequence = "wrong input";
         Type type = Type.DNA;
-        // Running Sequence constructor
         try {
             Sequence = new Sequence(sequence, type);
         } catch (Exception e) {
-            message = e.getMessage(); // TODO: unused exception message
+            message = e.getMessage();
+        }
+        assertEquals(exp_message, message);
+    }
+    @Test
+    public void Test_Sequence_WrongSequence_RNA() {
+        String exp_message = "RNA must contain only the letters A, U, G, and C.";
+        String message = "";
+        String sequence = "wrong input";
+        Type type = Type.RNA;
+        try {
+            Sequence = new Sequence(sequence, type);
+        } catch (Exception e) {
+            message = e.getMessage();
+        }
+        assertEquals(exp_message, message);
+    }
+    // Test: no inputs -> correct exception message
+    @Test
+    public void Test_Sequence_MissingSequence_DNA() {
+        String exp_message = "DNA must contain only the letters A, C, G, and T.";
+        String message = "";
+        String sequence = "";
+        Type type = Type.DNA;
+        try {
+            Sequence = new Sequence(sequence, type);
+        } catch (Exception e) {
+            message = e.getMessage();
+        }
+        assertEquals(exp_message, message);
+    }
+    @Test
+    public void Test_Sequence_MissingSequence_RNA() {
+        String exp_message = "RNA must contain only the letters A, U, G, and C.";
+        String message = "";
+        String sequence = "";
+        Type type = Type.RNA;
+        try {
+            Sequence = new Sequence(sequence, type);
+        } catch (Exception e) {
+            message = e.getMessage();
+        }
+        assertEquals(exp_message, message);
+    }
+
+
+    /**
+     Test: toString Method
+     */
+    // Test: returns correct sequence
+    @Test
+    public void Test_toString_RightInput_DNA() {
+        String message = "";
+        String sequence = "ACGT";
+        Type type = Type.DNA;
+        try {
+            Sequence = new Sequence(sequence, type);
+        } catch (Exception e) {
+            message = e.getMessage();
         }
         if (message.equals("")) {
             assertEquals(sequence, Sequence.toString());
         }
     }
     @Test
-    public void TestDNA_getType_RightInputs() {
+    public void Test_toString_RightInput_RNA() {
         String message = "";
-        // Parameters passed to "Sequence" constructor
-        String sequence = "ACGT";
-        Type type = Type.DNA;
-        // Running Sequence constructor
+        String sequence = "AUGC";
+        Type type = Type.RNA;
         try {
             Sequence = new Sequence(sequence, type);
         } catch (Exception e) {
-            message = e.getMessage(); // TODO: unused exception message
+            message = e.getMessage();
+        }
+        if (message.equals("")) {
+            assertEquals(sequence, Sequence.toString());
+        }
+    }
+
+    /**
+     Test: getType Method
+     */
+    // Test: returns correct type
+    @Test
+    public void Test_getType_RightInput_DNA() {
+        String message = "";
+        String sequence = "ACGT";
+        Type type = Type.DNA;
+        try {
+            Sequence = new Sequence(sequence, type);
+        } catch (Exception e) {
+            message = e.getMessage();
         }
         if (message.equals("")) {
             assertEquals(type, Sequence.getType());
         }
     }
     @Test
-    public void TestDNA_reverseComplement_RightInputs() {
-        // Variables being compared
-        String expectedCompliment = "TGCA";
-        // Unused message
+    public void Test_getType_RightInput_RNA() {
         String message = "";
-        // Parameters passed to "Sequence" constructor
-        String sequence = "ACGT";
-        Type type = Type.DNA;
-        // Instantiate Sequence
+        String sequence = "AUGC";
+        Type type = Type.RNA;
         try {
             Sequence = new Sequence(sequence, type);
         } catch (Exception e) {
             message = e.getMessage();
         }
-        // If no exception thrown, then continue
         if (message.equals("")) {
-            try {
-                Sequence.reverseComplement();
-            } catch (Exception e) {
-                message = e.getMessage();
-            }
-            if (message.equals("")) {
-                assertEquals(expectedCompliment, Sequence.toString());
-            }
-        }
-    }
-    @Test
-    public void TestDNA_palindrome() {
-        // Variables being compared
-        Boolean expectedPalindrome = Boolean.TRUE;
-        Boolean outputPalindrome = Boolean.FALSE;
-        // Unused message
-        String message = "";
-        // Parameters passed to "Sequence" constructor
-        String sequence = "ACCTAGGT";
-        Type type = Type.DNA;
-        // Instantiate Sequence
-        try {
-            Sequence = new Sequence(sequence, type);
-        } catch (Exception e) {
-            message = e.getMessage();
-        }
-        // If no exception thrown, then continue
-        if (message.equals("")) {
-            try {
-                outputPalindrome = Sequence.palindrome();
-            } catch (Exception e) {
-                message = e.getMessage();
-            }
-            if (message.equals("")) {
-                assertEquals(expectedPalindrome, outputPalindrome);
-            }
-        }
-    }
-    @Test
-    public void TestDNA_transcribe_sequence() {
-        // Expected output sequence
-        String expectedSequence = "ACCUAGGU";
-        // Unused message
-        String message = "";
-        // Parameters passed to "Sequence" constructor
-        String sequence = "ACCTAGGT";
-        Type type = Type.DNA;
-        // Instantiate Sequence
-        try {
-            Sequence = new Sequence(sequence, type);
-        } catch (Exception e) {
-            message = e.getMessage();
-        }
-        // If no exception thrown, then continue
-        if (message.equals("")) {
-            try {
-                Sequence.transcribe();
-            } catch (Exception e) {
-                message = e.getMessage();
-            }
-            if (message.equals("")) {
-                assertEquals(expectedSequence, Sequence.toString());
-            }
-        }
-    }
-    @Test
-    public void TestDNA_transcribe_type() {
-        // Expected output sequence
-        Type expectedType = Type.RNA;
-        // Unused message
-        String message = "";
-        // Parameters passed to "Sequence" constructor
-        String sequence = "ACCTAGGT";
-        Type type = Type.DNA;
-        // Instantiate Sequence
-        try {
-            Sequence = new Sequence(sequence, type);
-        } catch (Exception e) {
-            message = e.getMessage();
-        }
-        // If no exception thrown, then continue
-        if (message.equals("")) {
-            try {
-                Sequence.transcribe();
-            } catch (Exception e) {
-                message = e.getMessage();
-            }
-            if (message.equals("")) {
-                assertEquals(expectedType, Sequence.getType());
-            }
+            assertEquals(type, Sequence.getType());
         }
     }
 
 
-    // NEW SET OF TESTS
-    @Test
-    public void TestDNA_Sequence_PeptideInput() {
-        // Variables being compared
-        String expectedMessage = "";
-        String message = "";
-        // Parameters passed to "Sequence" constructor
-        String sequence = "TEST";
-        Type type = Type.Peptide;
-        // Running test
-        try {
-            Sequence = new Sequence(sequence, type);
-        } catch (Exception e) {
-            message = e.getMessage();
-        }
-        // Comparing result of the test
-        assertEquals(expectedMessage, message);
-    }
+    /**
+     Test: reverseComplement Method
+     */
+    // Test: provided peptide -> throws correct exception
     @Test
     public void Test_reverseComplement_PeptideInput() {
-        // Variables being compared
-        String expectedMessage = "Undefined sequence type for reverse complement.";
-        // Unused message
+        String exp_message = "Undefined sequence type for reverse complement.";
         String message = "";
-        // Parameters passed to "Sequence" constructor
-        String sequence = "TEST";
+        String sequence = "PEPTIDE";
         Type type = Type.Peptide;
-        // Instantiate Sequence
         try {
             Sequence = new Sequence(sequence, type);
         } catch (Exception e) {
             message = e.getMessage();
         }
-        // If no exception thrown, then continue
         if (message.equals("")) {
             try {
                 Sequence.reverseComplement();
             } catch (Exception e) {
                 message = e.getMessage();
             }
-            assertEquals(expectedMessage, message);
+            assertEquals(exp_message, message);
         }
     }
-
-
-    // NEW SET OF TESTS
+    // Test: after running -> sequence is in fact compliment
     @Test
-    public void TestRNA_Sequence_RightInputs() {
-        // Variables being compared
-        String expectedMessage = "";
+    public void Test_reverseComplement_RightInput_DNA() {
         String message = "";
-        // Parameters passed to "Sequence" constructor
-        String sequence = "AUGC";
-        Type type = Type.RNA;
-        // Running test
+        String exp_sequence = "TTAACCGG";
+        String sequence = "AATTGGCC";
+        Type type = Type.DNA;
         try {
             Sequence = new Sequence(sequence, type);
         } catch (Exception e) {
             message = e.getMessage();
         }
-        // Comparing result of the test
-        assertEquals(expectedMessage, message);
-    }
-    @Test
-    public void TestRNA_Sequence_WrongInputsException() {
-        // Variables being compared
-        String expectedMessage = "RNA must contain only the letters A, U, G, and C.";
-        String message = "";
-        // Parameters passed to "Sequence" constructor
-        String sequence = "TEST";
-        Type type = Type.RNA;
-        // Running test
-        try {
-            Sequence = new Sequence(sequence, type);
-        } catch (Exception e) {
-            message = e.getMessage();
-        }
-        // Comparing result of the test
-        assertEquals(expectedMessage, message);
-    }
-    @Test
-    public void TestRNA_toString_RightInputs() {
-        // Unused exception message
-        String message = "";
-        // Parameters passed to "Sequence" constructor
-        String sequence = "AUGC";
-        Type type = Type.RNA;
-        // Running Sequence constructor
-        try {
-            Sequence = new Sequence(sequence, type);
-        } catch (Exception e) {
-            message = e.getMessage(); // TODO: unused exception message
-        }
-        if (message.equals("")) {
-            assertEquals(sequence, Sequence.toString());
-        }
-    }
-    @Test
-    public void TestRNA_getType_RightInputs() {
-        String message = "";
-        // Parameters passed to "Sequence" constructor
-        String sequence = "AUGC";
-        Type type = Type.RNA;
-        // Running Sequence constructor
-        try {
-            Sequence = new Sequence(sequence, type);
-        } catch (Exception e) {
-            message = e.getMessage(); // TODO: unused exception message
-        }
-        if (message.equals("")) {
-            assertEquals(type, Sequence.getType());
-        }
-    }
-    @Test
-    public void TestRNA_reverseComplement_RightInputs() {
-        // Variables being compared
-        String expectedCompliment = "UACG";
-        // Unused message
-        String message = "";
-        // Parameters passed to "Sequence" constructor
-        String sequence = "AUGC";
-        Type type = Type.RNA;
-        // Instantiate Sequence
-        try {
-            Sequence = new Sequence(sequence, type);
-        } catch (Exception e) {
-            message = e.getMessage();
-        }
-        // If no exception thrown, then continue
         if (message.equals("")) {
             try {
                 Sequence.reverseComplement();
@@ -329,54 +210,164 @@ public class BioLibraryTests {
                 message = e.getMessage();
             }
             if (message.equals("")) {
-                assertEquals(expectedCompliment, Sequence.toString());
+                assertEquals(exp_sequence, Sequence.toString());
             }
         }
     }
     @Test
-    public void TestRNA_palindrome() {
-        // Variables being compared
-        Boolean expectedPalindrome = Boolean.FALSE;
-        Boolean outputPalindrome = Boolean.FALSE;
-        // Unused message
+    public void Test_reverseComplement_RightInput_RNA() {
         String message = "";
-        // Parameters passed to "Sequence" constructor
-        String sequence = "AUGC";
+        String exp_sequence = "UUAACCGG";
+        String sequence = "AAUUGGCC";
         Type type = Type.RNA;
-        // Instantiate Sequence
         try {
             Sequence = new Sequence(sequence, type);
         } catch (Exception e) {
             message = e.getMessage();
         }
-        // If no exception thrown, then continue
         if (message.equals("")) {
             try {
-                outputPalindrome = Sequence.palindrome();
+                Sequence.reverseComplement();
             } catch (Exception e) {
                 message = e.getMessage();
             }
             if (message.equals("")) {
-                assertEquals(expectedPalindrome, outputPalindrome);
+                assertEquals(exp_sequence, Sequence.toString());
             }
         }
     }
+
+
+    /**
+     Test: palindrome Method
+     */
+    // Test: sequence is palindrome -> return true
     @Test
-    public void TestRNA_transcribe_sequence() {
-        // Expected output sequence
-        String expectedSequence = "ATGC";
-        // Unused message
+    public void Test_palindrome_isPalindrome_DNA() {
         String message = "";
-        // Parameters passed to "Sequence" constructor
-        String sequence = "AUGC";
-        Type type = Type.RNA;
-        // Instantiate Sequence
+        Boolean out_palindrome = Boolean.FALSE;
+        String sequence = "ACGT";
+        Type type = Type.DNA;
         try {
             Sequence = new Sequence(sequence, type);
         } catch (Exception e) {
             message = e.getMessage();
         }
-        // If no exception thrown, then continue
+        if (message.equals("")) {
+            try {
+                out_palindrome = Sequence.palindrome();
+            } catch (Exception e) {
+                message = e.getMessage();
+            }
+            if (message.equals("")) {
+                assertEquals(Boolean.TRUE, out_palindrome);
+            }
+        }
+    }
+    @Test
+    public void Test_palindrome_isPalindrome_RNA() {
+        String message = "";
+        Boolean out_palindrome = Boolean.FALSE;
+        String sequence = "AUAU";
+        Type type = Type.RNA;
+        try {
+            Sequence = new Sequence(sequence, type);
+        } catch (Exception e) {
+            message = e.getMessage();
+        }
+        if (message.equals("")) {
+            try {
+                out_palindrome = Sequence.palindrome();
+            } catch (Exception e) {
+                message = e.getMessage();
+            }
+            if (message.equals("")) {
+                assertEquals(Boolean.TRUE, out_palindrome);
+            }
+        }
+    }
+    // Test: sequence is not palindrome -> return false
+    @Test
+    public void Test_palindrome_notPalindrome_DNA() {
+        String message = "";
+        Boolean out_palindrome = Boolean.FALSE;
+        String sequence = "AAAA";
+        Type type = Type.DNA;
+        try {
+            Sequence = new Sequence(sequence, type);
+        } catch (Exception e) {
+            message = e.getMessage();
+        }
+        if (message.equals("")) {
+            try {
+                out_palindrome = Sequence.palindrome();
+            } catch (Exception e) {
+                message = e.getMessage();
+            }
+            if (message.equals("")) {
+                assertEquals(Boolean.FALSE, out_palindrome);
+            }
+        }
+    }
+    @Test
+    public void Test_palindrome_notPalindrome_RNA() {
+        String message = "";
+        Boolean out_palindrome = Boolean.FALSE;
+        String sequence = "AAAA";
+        Type type = Type.RNA;
+        try {
+            Sequence = new Sequence(sequence, type);
+        } catch (Exception e) {
+            message = e.getMessage();
+        }
+        if (message.equals("")) {
+            try {
+                out_palindrome = Sequence.palindrome();
+            } catch (Exception e) {
+                message = e.getMessage();
+            }
+            if (message.equals("")) {
+                assertEquals(Boolean.FALSE, out_palindrome);
+            }
+        }
+    }
+    // Test: construction of reverse complement fails -> throws exception
+    @Test
+    public void Test_palindrome_PeptideInput() {
+        String exp_message = "Undefined sequence type for reverse complement.";
+        String message = "";
+        String sequence = "PEPTIDE";
+        Type type = Type.Peptide;
+        try {
+            Sequence = new Sequence(sequence, type);
+        } catch (Exception e) {
+            message = e.getMessage();
+        }
+        if (message.equals("")) {
+            try {
+                Sequence.palindrome();
+            } catch (Exception e) {
+                message = e.getMessage();
+            }
+            assertEquals(exp_message, message);
+        }
+    }
+
+    /**
+     Test: transcribe Method
+     */
+    // Test: after successful run -> type successfully changed
+    @Test
+    public void Test_transcribe_DNAtoRNA_type() {
+        String message = "";
+        String sequence = "AACCGGTT";
+        Type exp_type = Type.RNA;
+        Type type = Type.DNA;
+        try {
+            Sequence = new Sequence(sequence, type);
+        } catch (Exception e) {
+            message = e.getMessage();
+        }
         if (message.equals("")) {
             try {
                 Sequence.transcribe();
@@ -384,26 +375,21 @@ public class BioLibraryTests {
                 message = e.getMessage();
             }
             if (message.equals("")) {
-                assertEquals(expectedSequence, Sequence.toString());
+                assertEquals(exp_type, Sequence.getType());
             }
         }
     }
     @Test
-    public void TestRNA_transcribe_type() {
-        // Expected output sequence
-        Type expectedType = Type.DNA;
-        // Unused message
+    public void Test_transcribe_RNAtoDNA_type() {
         String message = "";
-        // Parameters passed to "Sequence" constructor
-        String sequence = "ACCTAGGT";
+        String sequence = "AAUUGGCC";
+        Type exp_type = Type.DNA;
         Type type = Type.RNA;
-        // Instantiate Sequence
         try {
             Sequence = new Sequence(sequence, type);
         } catch (Exception e) {
             message = e.getMessage();
         }
-        // If no exception thrown, then continue
         if (message.equals("")) {
             try {
                 Sequence.transcribe();
@@ -411,8 +397,74 @@ public class BioLibraryTests {
                 message = e.getMessage();
             }
             if (message.equals("")) {
-                assertEquals(expectedType, Sequence.getType());
+                assertEquals(exp_type, Sequence.getType());
             }
+        }
+    }
+    // Test: after successful run -> sequence successfully changed
+    @Test
+    public void Test_transcribe_DNAtoRNA_sequence() {
+        String message = "";
+        String exp_sequence = "AACCGGUU";
+        String sequence = "AACCGGTT";
+        Type type = Type.DNA;
+        try {
+            Sequence = new Sequence(sequence, type);
+        } catch (Exception e) {
+            message = e.getMessage();
+        }
+        if (message.equals("")) {
+            try {
+                Sequence.transcribe();
+            } catch (Exception e) {
+                message = e.getMessage();
+            }
+            if (message.equals("")) {
+                assertEquals(exp_sequence, Sequence.toString());
+            }
+        }
+    }
+    @Test
+    public void Test_transcribe_RNAtoDNA_sequence() {
+        String message = "";
+        String exp_sequence = "AATTGGCC";
+        String sequence = "AAUUGGCC";
+        Type type = Type.RNA;
+        try {
+            Sequence = new Sequence(sequence, type);
+        } catch (Exception e) {
+            message = e.getMessage();
+        }
+        if (message.equals("")) {
+            try {
+                Sequence.transcribe();
+            } catch (Exception e) {
+                message = e.getMessage();
+            }
+            if (message.equals("")) {
+                assertEquals(exp_sequence, Sequence.toString());
+            }
+        }
+    }
+    // Test: type is not RNA or DNA -> throws exception
+    @Test
+    public void Test_transcribe_PeptideException() {
+        String message = "";
+        String exp_message = "Undefined sequence type for transcription.";
+        String sequence = "PEPTIDE";
+        Type type = Type.Peptide;
+        try {
+            Sequence = new Sequence(sequence, type);
+        } catch (Exception e) {
+            message = e.getMessage();
+        }
+        if (message.equals("")) {
+            try {
+                Sequence.transcribe();
+            } catch (Exception e) {
+                message = e.getMessage();
+            }
+            assertEquals(exp_message, message);
         }
     }
 }

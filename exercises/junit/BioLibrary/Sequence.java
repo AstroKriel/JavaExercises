@@ -33,21 +33,18 @@ enum Type {DNA, RNA, Peptide}
  * Represents an arbitrary molecular sequence.
  */
 public class Sequence {
-
     static Map<Character, Character> complementDNA = new HashMap<Character, Character>() {{
         put('A', 'T');
         put('C', 'G');
         put('G', 'C');
         put('T', 'A');
     }};
-
     static Map<Character, Character> complementRNA = new HashMap<Character, Character>() {{
         put('A', 'U');
         put('U', 'A');
         put('G', 'C');
         put('C', 'G');
     }};
-
 
     private Type type;
     private String sequence;
@@ -104,7 +101,6 @@ public class Sequence {
      * @throws SequenceException if the sequence type is neither DNA nor RNA.
      */
     public String reverseComplement() throws SequenceException {
-
         char[] rc = sequence.toCharArray();
         Map<Character, Character> table = null;
         switch (type) {
@@ -134,9 +130,12 @@ public class Sequence {
      * @throws SequenceException if construction of the reverse complement fails.
      */
     public boolean palindrome() throws SequenceException {
+        String orig = this.sequence;
         String reverse = new StringBuilder(sequence).reverse().toString();
         Sequence reverseSequence = new Sequence(reverse, type);
-        return sequence.equals(reverseSequence.reverseComplement());
+        String output = reverseSequence.reverseComplement();
+
+        return sequence.equals(output);
     }
 
     /**
@@ -151,7 +150,6 @@ public class Sequence {
      */
     public void transcribe() throws SequenceException {
         char[] transcription = sequence.toCharArray();
-
         char target = 0;
         char replacement = 0;
 
@@ -168,10 +166,8 @@ public class Sequence {
                 throw new SequenceException("Undefined sequence type for transcription.");
         }
 
-        for (int i = 0; i < transcription.length; i++)
-        {
-            if (transcription[i] == target)
-            {
+        for (int i = 0; i < transcription.length; i++) {
+            if (transcription[i] == target) {
                 transcription[i] = replacement;
             }
         }
