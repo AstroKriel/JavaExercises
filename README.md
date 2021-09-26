@@ -1,2 +1,2 @@
 # JavaExercises
-Java exercises I completed through a course in my B.Software Engineering degree.
+Java exercises I completed for a course.
